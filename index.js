@@ -1,5 +1,6 @@
 module.exports = (req) => {
     return req
+    .on('error', warn.bind(null, 'REQUEST ERROR EVENT'))
     .on('abort', warn.bind(null, 'REQUEST ABORT EVENT'))
     .on('aborted', warn.bind(null, 'REQUEST ABORTED EVENT'))
     .on('connect', warn.bind(null, 'REQUEST CONNECT EVENT'))
@@ -22,7 +23,7 @@ module.exports = (req) => {
         response
         .on('aborted', error.bind(null, 'RESPONSE ABORTED EVENT'))
         .on('close', error.bind(null, 'RESPONSE CLOSE EVENT'))
-        
+
         response.socket
         .on('close', error.bind(null, 'RESPONSE SOCKET CLOSE EVENT'))
         .on('connect', error.bind(null, 'RESPONSE SOCKET CONNECT EVENT'))
